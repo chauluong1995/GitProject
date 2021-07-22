@@ -1,0 +1,57 @@
+<!--top bar-->
+<div class="container-fluid">
+  <div id="info-bar" class="row text-white">
+    <div class="col-sm-9 d-flex align-items-center">
+      <ul class="list-inline">
+        <li class="list-inline-item pr-2"><i class="fa fa-map-marker p-1"></i> 33b A Ma Khê, P. Tân Lập, Tp. Buôn Ma
+          Thuột, Tỉnh Đắk Lắk
+        </li>
+        <li class="list-inline-item"><i class="fa fa-phone p-1"></i> 0915 816 129</li>
+        <li class="list-inline-item"><i class="fa fa-clock-o p-1"></i> Thứ 2 - Thứ 7 từ 8:00 đến 21:00</li>
+      </ul>
+    </div>
+    <div class="col-sm-3 d-flex align-items-center">
+      <ul class="list-inline ml-auto" *ngIf="!currentUser">
+        <li class="list-inline-item pr-2"><i class="fa fa-lock p-1"></i><a routerLink="/login"> Đăng nhập</a></li>
+        <li class="list-inline-item"><i class="fa fa-plus p-1"></i><a routerLink="/register"> Đăng ký</a></li>
+      </ul>
+
+      <ul class="list-inline ml-auto" *ngIf="currentUser">
+        <li class="list-inline-item dropdown show">
+          <a class="dropdown-toggle nav-link p-0" href="#"
+             id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span><i class="fa fa-user p-1"></i> {{currentUser.fullName}} </span>
+          </a>
+
+          <div class="dropdown-menu dropdown-menu-right"
+               aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#" id="accountDetails" [routerLink]="['/customer/information']"
+               *ngIf="currentUser.role == 'Customer'">Thông tin tài khoản</a>
+            <a class="dropdown-item" href="#" id="accountAdminDetails" [routerLink]="['/admin/information']"
+               *ngIf="currentUser.role == 'Admin'">Thông tin tài khoản</a>
+            <a class="dropdown-item" href="#" id="accountEmployeeDetails" [routerLink]="['/employee/information']"
+               *ngIf="currentUser.role == 'Employee'">Thông tin tài khoản</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#" (click)="logout()">Đăng xuất</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--top bar end-->
+
+  <!--nav bar-->
+  <div class="row">
+    <div class="col-sm-9">
+      <a><img style="height: 100px" src="assets/logo.png" alt="icon" routerLink=""></a>
+    </div>
+    <div class="col-sm-3">
+      <div class="row" style="font-size: 17px; margin-top: 12%">
+        <a routerLink="/">TRANG CHỦ <span class="sr-only">(current)</span></a>
+        <a [routerLink]="['/product']" style="margin: 0 25px">SẢN PHẨM</a>
+        <a [routerLink]="['/cart']">GIỎ HÀNG</a>
+      </div>
+    </div>
+  </div>
+  <!--nav bar end-->
+</div>

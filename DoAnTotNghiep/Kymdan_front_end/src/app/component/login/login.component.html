@@ -1,0 +1,50 @@
+<div class="container-fluid bg-white">
+  <div class="row justify-content-center">
+    <div class="col-sm-12">
+      <div class="row border bg-light" style="border-radius: 20px">
+        <div class="col-sm-6">
+          <div class="pt-5">
+            <div class="pt-5 d-flex justify-content-center">
+              <h1 style="color: green">Đăng nhập</h1>
+            </div>
+            <div>
+              <div class="row justify-content-center">
+                <mat-error>{{message}}</mat-error>
+              </div>
+              <div class="row d-flex justify-content-center">
+                <form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Tên đăng nhập</mat-label>
+                        <input matInput formControlName="email">
+                        <mat-error *ngIf="loginForm.controls.email.errors?.required">Tài khoản không được để trống
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <mat-form-field class="example-full-width">
+                        <mat-label>Mật khẩu</mat-label>
+                        <input type="password" matInput formControlName="password">
+                        <mat-error *ngIf="loginForm.controls.password.errors?.required">Mật khẩu không được để trống
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="row pt-3 justify-content-center">
+                    <button mat-button type="submit">Đăng nhập</button><br>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 pr-0">
+          <img src="assets/g4.jpg" style="width: 100%" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

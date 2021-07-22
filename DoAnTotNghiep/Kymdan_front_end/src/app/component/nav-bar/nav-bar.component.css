@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+ul.list-inline {
+  margin: 12px 0;
+}
+
+#info-bar {
+  font-family: 'Lato', sans-serif;
+  background: green;
+  font-size: 15px;
+}
+
+body {
+  font-family: 'Breda Bold', sans-serif;
+}
+
+nav {
+  font-weight: bold;
+}
+
+#info-bar > div > ul > li > a {
+  color: white;
+}
+
+a {
+  color: green;
+}

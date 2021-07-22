@@ -1,0 +1,118 @@
+<div class="container-fluid bg-white">
+  <div class="row border" style="border-radius: 20px">
+    <div class="col-sm-6"><img src="assets/g8.jpg" alt="" style="width: 100%"></div>
+    <div class="col-sm-6 pt-3">
+      <div class="d-flex justify-content-center">
+        <h1>Thông tin tài khoản</h1>
+      </div>
+
+      <div class="d-flex justify-content-center" style="margin: -15px 0 5px 0">
+        <mat-error *ngIf="message">{{message}}</mat-error>
+      </div>
+
+      <div class="p-0">
+        <form (ngSubmit)="submit()" [formGroup]="editForm">
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Tên đăng nhập</mat-label>
+                <input matInput value="{{customer.fullName}}" readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Email</mat-label>
+                <input matInput value="{{customer.email}}" readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Điện thoại <i style="margin-left: 5px" class="fa fa-pencil" *ngIf="flagEdit"></i></mat-label>
+                <input *ngIf="!flagEdit" matInput value="{{customer.phone}}" readonly>
+                <input matInput formControlName="phone" *ngIf="flagEdit">
+                <mat-error *ngIf="editForm.controls.phone.errors?.required">Điện thoại không đươc để trống.
+                </mat-error>
+                <mat-error *ngIf="editForm.controls.phone.errors?.pattern">Điện thoại không đúng định dạng.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <mat-form-field>
+                <mat-label>Ngày sinh <i style="margin-left: 5px" class="fa fa-pencil" *ngIf="flagEdit"></i></mat-label>
+                <input *ngIf="!flagEdit" matInput value="{{customer.birthday | date:'MM/dd/yyyy'}}" readonly>
+                <input matInput [matDatepicker]="picker" formControlName="birthday" *ngIf="flagEdit">
+                <mat-error *ngIf="editForm.controls.birthday.errors?.required">Ngày sinh không đươc để trống.
+                </mat-error>
+                <mat-error *ngIf="editForm.controls.birthday.errors?.ageError">Tuổi phải lớn hơn 16 và nhỏ hơn
+                  150.
+                </mat-error>
+                <mat-datepicker-toggle *ngIf="flagEdit" matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Địa chỉ <i style="margin-left: 5px" class="fa fa-pencil" *ngIf="flagEdit"></i></mat-label>
+                <input *ngIf="!flagEdit" matInput value="{{customer.address}}" readonly>
+                <input *ngIf="flagEdit" matInput formControlName="address">
+                <mat-error *ngIf="editForm.controls.address.errors?.required">Địa chỉ không đươc để trống.
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <mat-form-field class="example-full-width">
+                <mat-label>Giới tính</mat-label>
+                <input matInput value="{{customer.gender}}" readonly>
+              </mat-form-field>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+
+          <div class="row pb-1" *ngIf="flagEdit">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6 d-flex justify-content-center">
+              <button mat-button type="submit">Cập nhật</button>
+            </div>
+            <div class="col-sm-3"></div>
+          </div>
+        </form>
+
+        <div class="row pb-1" *ngIf="!flagEdit">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-6 d-flex justify-content-center">
+            <button mat-button (click)="edit()" style="width: 155px; margin-right: 5px">Chỉnh sửa thông tin</button>
+            <button mat-button (click)="openDialogEditPassword()" style="width: 115px">Đổi mật khẩu</button>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
