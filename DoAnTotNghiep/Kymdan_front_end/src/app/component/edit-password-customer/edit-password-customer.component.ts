@@ -1,6 +1,6 @@
-import {Component, ElementRef, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 import {CustomerService} from '../../service/customer.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import {Router} from '@angular/router';
@@ -14,13 +14,11 @@ import {LoginService} from '../../service/login.service';
 export class EditPasswordCustomerComponent implements OnInit {
   public username;
   public editForm: FormGroup;
-  public message;
 
   public matcher = new ErrorStateMatcher();
 
   constructor(
     public dialogRef: MatDialogRef<EditPasswordCustomerComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     public formBuilder: FormBuilder,
     public customerService: CustomerService,
     public el: ElementRef,
@@ -57,9 +55,7 @@ export class EditPasswordCustomerComponent implements OnInit {
     if (this.editForm.valid) {
       this.customerService.editPassword(this.username, this.editForm.value.oldPassword, this.editForm.value.newPassword)
         .subscribe(data => {
-          this.message = data.message;
-          this.router.navigate(['customer/information', {message: this.message}]).then(r => {
-          });
+          this.dialogRef.close(data.message);
         });
     } else {
       for (const key of Object.keys(this.editForm.controls)) {

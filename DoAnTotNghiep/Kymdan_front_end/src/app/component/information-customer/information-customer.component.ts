@@ -89,6 +89,7 @@ export class InformationCustomerComponent implements OnInit {
   }
 
   openDialogEditPassword() {
+    this.message = '';
     const dialogRefEdit = this.dialog.open(EditPasswordCustomerComponent, {
       width: '500px',
       height: '319px',
@@ -97,6 +98,7 @@ export class InformationCustomerComponent implements OnInit {
     });
 
     dialogRefEdit.afterClosed().subscribe(result => {
+      this.message = result;
       this.ngOnInit()
     })
   }

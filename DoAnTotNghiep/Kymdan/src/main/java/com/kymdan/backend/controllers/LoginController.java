@@ -14,6 +14,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,6 +34,9 @@ public class LoginController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
+    @Autowired
+    private PasswordEncoder bcryptEncoder;
+
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> login(@RequestBody LoginDTO loginRequest) throws Exception {
         String username = loginRequest.getUsername();
@@ -40,7 +44,7 @@ public class LoginController {
         AppAccount account = appAccountRepository.findByUsername(username);
 
         // check account
-        if (account == null) {
+        if (account == null || !bcryptEncoder.matches(password, account.getPassword())) {
             return ResponseEntity.ok(new MessageDTO("Thông tin đăng nhập không hợp lệ !"));
         }
 
